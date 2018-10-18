@@ -17,12 +17,8 @@ I can link directly to my [about page](about.html)
 <img src="images/Rplot01.png" style="width:75%">
 
 ### I can add code
-```{r}
-tibble(
-  x = 1: 10,
-  y = x + 2
-)
-```
+
+My code page is  [here](code.html)
 
 
 
