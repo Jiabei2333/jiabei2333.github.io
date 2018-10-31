@@ -13,18 +13,11 @@ And I can put all kinds of stuff on it!
 I *could* write some 
 
 ### Add some links 
-I like [to like for code on the internet](https://www.google.com/).
+Click here to view my [resume](resume.html)
 
-I can link directly to my [about page](about.html)
+Click [here](https://github.com/) to navigate my github account
 
-###Picture
-
-<img src="images/Rplot01.png" style="width:75%">
-
-### I can add code
-
-My code page is  [here](code.html)
-
+Click here to view my [dashboard](dashboard_template.html)
 
 
 

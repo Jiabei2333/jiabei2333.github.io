@@ -1,27 +1,24 @@
+
 ---
-title: "code"
-author: "Jiabei Wang"
-date: "2018???10???18???"
-output: html_document
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-```{r}
-library(tidyverse)
-tibble(
-  x = 1: 10,
-  y = x + 2
-)
-```
-
-
-```{r}
+```{r setup, include=FALSE}
+library(flexdashboard)
 library(tidyverse)
 library(viridis)
 library(p8105.datasets)
-
 library(plotly)
 
 ```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
 
 ```{r}
 set.seed(1) ##end up with the same random sample
@@ -86,4 +83,3 @@ nyc_airbnb %>%
 ggplotly(scatter_ggplot)
 
 ```
-
