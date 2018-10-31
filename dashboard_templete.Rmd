@@ -22,64 +22,39 @@ Column {data-width=650}
 
 ```{r}
 set.seed(1) ##end up with the same random sample
-
-data(nyc_airbnb)
-nyc_airbnb = 
-  nyc_airbnb %>% 
-  mutate(rating = review_scores_location / 2) %>%
-  select(boro = neighbourhood_group, neighbourhood, rating, price, room_type,
-         latitude, longitude) %>%
-  filter(!is.na(rating), 
-         boro == "Manhattan",
-         room_type == "Entire home/apt",
-         price %in% 100:500)  %>% 
-  sample_n(5000)
+data(instacart) 
+data_instacart = janitor::clean_names(instacart) %>% 
+group_by(aisle_id) %>%
+summarize(n = n()) 
 ```
 
-###plotly scatterplot
+###plotly scatterplotd
 ```{r}
-nyc_airbnb %>%
-  mutate(text_label = str_c("Price: $", price, '\nRating: ', rating)) %>% 
-  plot_ly(x = ~longitude, y = ~latitude, type = "scatter", mode = "markers",
-          alpha = 0.5, 
-          color = ~price,
-          text = ~text_label)
+data_instacart %>%
+  plot_ly(x = ~aisle_id, y = ~n, type = "scatter") %>% 
+          layout(
+            title = "orders of each aisle id vs aisle id"
+          )
 ```
+Column {data-width=650}
+-----------------------------------------------------------------------
 
 ### plotly boxplot
 ```{r}
-common_neighborhoods =
-  nyc_airbnb %>% 
-  count(neighbourhood, sort = TRUE) %>% 
-  top_n(8) %>% 
-  select(neighbourhood)
-## Selecting by n
-
-inner_join(nyc_airbnb, common_neighborhoods,
-             by = "neighbourhood") %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
-  plot_ly(y = ~price, color = ~neighbourhood, type = "box",
-          colors = "Set2")
+janitor::clean_names(instacart) %>%
+filter(order_number>40) %>% 
+group_by(department) %>%
+plot_ly(x = ~department, y = ~order_number, color = ~department, type = "box", colors = "Set2") %>%
+layout( title = "Order_number vs Department")
 ```
 
 ### bar charts
 ```{r}
-nyc_airbnb %>% 
-  count(neighbourhood) %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
-  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
+janitor::clean_names(instacart) %>%
+  count(department) %>% 
+  top_n(8) %>% 
+  mutate(department = fct_reorder(department, n)) %>% 
+   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar") %>%
+layout( title = "Orders in each Department vs Department")
 ```
 
-### ggplotly
-```{r}
-  scatter_ggplot = 
-  nyc_airbnb %>%
-  ggplot(aes(x = longitude, y = latitude, color = price)) +
-  geom_point(alpha = 0.25) +
-  scale_color_viridis() +
-  coord_cartesian() +
-  theme_classic()
-
-ggplotly(scatter_ggplot)
-
-```
