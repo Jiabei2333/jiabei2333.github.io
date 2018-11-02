@@ -58,7 +58,7 @@ janitor::clean_names(instacart) %>%
   top_n(8) %>% 
   mutate(department = fct_reorder(department, n)) %>% 
    plot_ly(x = ~department, y = ~n, color = ~department, type = "bar") %>%
-layout( title = "Number of orders in each department",
+layout( title = "Number of orders in each",
          xaxis = list(title = "Department"),
               yaxis = list(title = "Orders in each Department"))
 ```
