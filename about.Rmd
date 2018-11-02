@@ -1,0 +1,8 @@
+---
+title: "about"
+author: "Jiabei Wang"
+date: "2018 Nov 1st"
+output: html_document
+---
+
+My name is Jiabei Wang, and I am a first year biostatistics student under Mailman School of Public Health. 

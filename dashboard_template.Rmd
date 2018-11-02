@@ -33,10 +33,12 @@ summarize(n = n())
 data_instacart %>%
   plot_ly(x = ~aisle_id, y = ~n, type = "scatter") %>% 
           layout(
-            title = "orders of each aisle id vs aisle id"
+            title = "Orders of each aisle_id ",
+              xaxis = list(title = "Aisle_id"),
+              yaxis = list(title = "Orders of each aisle_id")
           )
 ```
-Column {data-width=650}
+Column {data-width=350}
 -----------------------------------------------------------------------
 
 ### plotly boxplot
@@ -45,7 +47,8 @@ janitor::clean_names(instacart) %>%
 filter(order_number>40) %>% 
 group_by(department) %>%
 plot_ly(x = ~department, y = ~order_number, color = ~department, type = "box", colors = "Set2") %>%
-layout( title = "Order_number vs Department")
+layout( title = "Order_number vs Department"
+        )
 ```
 
 ### bar charts
@@ -55,6 +58,8 @@ janitor::clean_names(instacart) %>%
   top_n(8) %>% 
   mutate(department = fct_reorder(department, n)) %>% 
    plot_ly(x = ~department, y = ~n, color = ~department, type = "bar") %>%
-layout( title = "Orders in each Department vs Department")
+layout( title = "Number of orders in each department",
+         xaxis = list(title = "Department"),
+              yaxis = list(title = "Orders in each Department"))
 ```
 
